@@ -1,29 +1,41 @@
 export const runValidation = (userCode, solutionSnippet, language) => {
+  if (!userCode || userCode.trim() === "") {
+    return { 
+      success: false, 
+      error: "Empty Buffer: Please provide code input." 
+    };
+  }
+
   try {
-    
-    const sanitizedCode = userCode.replace(/\s+/g, '').replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '');
-    const sanitizedSnippet = solutionSnippet.replace(/\s+/g, '');
-
-    
-    // في المشاريع المتقدمة يتم إرسال الكود إلى Backend Container (Docker)
-    const isLogicValid = sanitizedCode.includes(sanitizedSnippet);
-    
-
-    if (language === 'javascript') {
+    if (language === 'javascript' || language === 'js') {
       new Function(userCode); 
     }
 
-    return {
-      success: isLogicValid,
-      error: isLogicValid ? null : "Security Protocol Failed: Logic Inconsistency Detected",
-      timestamp: Date.now()
+    const clean = (str) => {
+      return str
+        .replace(/\s+/g, '')
+        .replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')
+        .toLowerCase();
     };
+
+    const sanitizedUserCode = clean(userCode);
+    const sanitizedSnippet = clean(solutionSnippet);
+
+    const isCorrect = sanitizedUserCode.includes(sanitizedSnippet);
+
+    return {
+      success: isCorrect,
+      error: isCorrect ? null : "SECURITY_MATCH_FAILED: Logic doesn't match firewall signature.",
+      status: isCorrect ? "ACCESS_GRANTED" : "REJECTED",
+      timestamp: new Date().toISOString()
+    };
+
   } catch (err) {
     return {
       success: false,
-      error: `Syntax Error: ${err.message}`,
-      timestamp: Date.now()
+      error: `SYNTAX_ERROR: ${err.message}`,
+      status: "COMPILATION_FAILED"
     };
   }
 };
-    
+        
