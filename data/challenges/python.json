@@ -1,0 +1,47 @@
+{
+  "category": "Python System Exploitation",
+  "challenges": [
+    {
+      "id": "PY_001",
+      "level": 26,
+      "title": "The Ziggurat Protocol",
+      "language": "python",
+      "site": "Iraq - Ziggurat of Ur",
+      "image": "/assets/images/iraq/ziggurat_ur.jpg",
+      "description": "Map the coordinates of the temple using dictionary comprehension to bypass the guardian.",
+      "starterCode": "def map_coordinates(data):\n    # Return a dict mapping x to y\n    pass",
+      "solutionSnippet": "{x: y for",
+      "points": 1200,
+      "difficulty": "Easy",
+      "firewallType": "Data_Structure_Wall"
+    },
+    {
+      "id": "PY_012",
+      "level": 37,
+      "title": "Wadi Rum Star-Link",
+      "language": "python",
+      "site": "Jordan - Wadi Rum",
+      "image": "/assets/images/jordan/wadi_rum.jpg",
+      "description": "Intercept the Martian signal. Filter out noise using lambda functions.",
+      "starterCode": "def intercept(signals):\n    # Filter signals > 1024\n    return list(filter(None, signals))",
+      "solutionSnippet": "lambda x: x > 1024",
+      "points": 1800,
+      "difficulty": "Medium",
+      "firewallType": "Signal_Noise_Filter"
+    },
+    {
+      "id": "PY_025",
+      "level": 50,
+      "title": "The Abbasid Cipher",
+      "language": "python",
+      "site": "Iraq - Malwiya Mosque",
+      "image": "/assets/images/iraq/samarra.jpg",
+      "description": "Decode the spiral script using recursion to reach the top of the minaret.",
+      "starterCode": "def climb_minaret(steps):\n    # Recursive climb\n    if steps <= 0: return 1\n    pass",
+      "solutionSnippet": "climb_minaret(steps - 1)",
+      "points": 3000,
+      "difficulty": "Hard",
+      "firewallType": "Recursive_Loop_Gate"
+    }
+  ]
+    }
