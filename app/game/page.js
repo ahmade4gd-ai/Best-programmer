@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useGameStore } from '../../context/GameContext';
-import CHALLENGES from '../../data/challenges/javascript.json';
+import CHALLENGES_DATA from '../../data/challenges/javascript.json';
 import { runValidation } from '../../utils/codeRunner';
 import { calculateFinalScore } from '../../utils/scoringEngine';
 import dynamic from 'next/dynamic';
@@ -16,16 +16,18 @@ export default function GameEngine() {
   const [startTime, setStartTime] = useState(Date.now());
   const [isProcessing, setIsProcessing] = useState(false);
   
-  const activeChallenge = CHALLENGES.find(c => c.id === currentLevel) || CHALLENGES[0];
+  const challenges = Array.isArray(CHALLENGES_DATA) ? CHALLENGES_DATA : (CHALLENGES_DATA.challenges || []);
+  const activeChallenge = challenges.find(c => c.id === currentLevel) || challenges[0];
 
   useEffect(() => {
-    setCode(activeChallenge.template);
-    setStartTime(Date.now());
-  }, [currentLevel]);
+    if (activeChallenge) {
+      setCode(activeChallenge.template);
+      setStartTime(Date.now());
+    }
+  }, [currentLevel, activeChallenge]);
 
   const handleExecute = async () => {
     setIsProcessing(true);
-    
     await new Promise(r => setTimeout(r, 1500));
     
     const result = runValidation(code, activeChallenge.solutionSnippet, activeChallenge.language);
@@ -41,13 +43,12 @@ export default function GameEngine() {
     setIsProcessing(false);
   };
 
+  if (!activeChallenge) return null;
+
   return (
     <div className="flex h-full w-full">
-      
       <Sidebar currentLevel={currentLevel} />
-
       <main className="flex-1 flex flex-col relative border-x border-cyan-900/30">
-  
         <header className="h-20 bg-slate-950/80 border-b border-cyan-900/30 flex items-center justify-between px-6 backdrop-blur-xl">
           <div>
             <h1 className="text-xl font-black text-white tracking-widest uppercase">
@@ -60,7 +61,6 @@ export default function GameEngine() {
             <div className="text-xl font-mono text-emerald-400 font-bold">{totalPoints.toLocaleString()} XP</div>
           </div>
         </header>
-
         <div className="flex-1 relative group">
           <MonacoEditor 
             language={activeChallenge.language} 
@@ -73,14 +73,12 @@ export default function GameEngine() {
             </div>
           )}
         </div>
-
         <footer className="h-24 bg-slate-950 border-t border-cyan-900/30 flex items-center justify-between px-10">
           <div className="flex gap-8">
             <Stat label="Language" value={activeChallenge.language.toUpperCase()} color="text-yellow-500" />
             <Stat label="Difficulty" value={activeChallenge.difficulty} color="text-red-500" />
             <Stat label="Firewall" value={activeChallenge.firewallType} color="text-cyan-500" />
           </div>
-          
           <button 
             onClick={handleExecute}
             disabled={isProcessing}
@@ -90,7 +88,6 @@ export default function GameEngine() {
           </button>
         </footer>
       </main>
-
       <Terminal activeChallenge={activeChallenge} />
     </div>
   );
@@ -103,5 +100,5 @@ function Stat({ label, value, color }) {
       <span className={`text-sm font-black ${color}`}>{value}</span>
     </div>
   );
-    }
+      }
     
