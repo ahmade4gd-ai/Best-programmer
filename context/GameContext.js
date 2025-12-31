@@ -14,7 +14,6 @@ export function GameProvider({ children }) {
     inventory: []
   });
 
-  
   useEffect(() => {
     const savedGame = localStorage.getItem('cyberQuest_v1');
     if (savedGame) {
@@ -22,15 +21,13 @@ export function GameProvider({ children }) {
     }
   }, []);
 
-  
   useEffect(() => {
     localStorage.setItem('cyberQuest_v1', JSON.stringify(gameState));
   }, [gameState]);
 
-  const completeLevel = (levelId, points, siteName) => {
+  const unlockLevel = (levelId, points, siteName) => {
     setGameState(prev => {
       const isNewLevel = !prev.completedLevels.includes(levelId);
-      
       
       let newSites = [...prev.unlockedSites];
       if (siteName && !newSites.includes(siteName)) {
@@ -53,7 +50,8 @@ export function GameProvider({ children }) {
       totalPoints: 0,
       completedLevels: [],
       unlockedSites: ["البتراء"],
-      lastLogin: Date.now()
+      lastLogin: Date.now(),
+      inventory: []
     };
     setGameState(initialState);
     localStorage.removeItem('cyberQuest_v1');
@@ -62,7 +60,8 @@ export function GameProvider({ children }) {
   return (
     <GameContext.Provider value={{ 
       ...gameState, 
-      completeLevel, 
+      unlockLevel,
+      completeLevel: unlockLevel, 
       resetGame,
       isLevelCompleted: (id) => gameState.completedLevels.includes(id)
     }}>
@@ -71,11 +70,13 @@ export function GameProvider({ children }) {
   );
 }
 
-export const useGame = () => {
+export const useGameStore = () => {
   const context = useContext(GameContext);
   if (!context) {
-    throw new Error('useGame must be used within a GameProvider');
+    throw new Error('useGameStore must be used within a GameProvider');
   }
   return context;
 };
-          
+
+export const useGame = useGameStore;
+      
