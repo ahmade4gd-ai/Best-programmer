@@ -1,6 +1,6 @@
 import { Vazirmatn, JetBrains_Mono } from 'next/font/google';
 import '../styles/globals.css';
-import { useGameStore } from '../../context/GameContext';
+import { useGameStore } from '../context/GameContext';
 
 
 
