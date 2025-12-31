@@ -1,13 +1,13 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useGameStore } from '../../context/GameContext';
-
-import CHALLENGES from '@/data/challenges/javascript.json';
-import { runValidation } from '@/utils/codeRunner';
-import { calculateFinalScore } from '@/utils/scoringEngine';
+import { useGameStore } from '../../../context/GameContext';
+import CHALLENGES from '../../../data/challenges/javascript.json';
+import { runValidation } from '../../utils/codeRunner';
+import { calculateFinalScore } from '../../utils/scoringEngine';
 import dynamic from 'next/dynamic';
-import Sidebar from '@/components/game/Sidebar';
-import Terminal from '@/components/game/Terminal';
+import Sidebar from '../../components/game/Sidebar';
+import Terminal from '../../components/game/Terminal';
+
 
 
 const MonacoEditor = dynamic(() => import('@/components/game/MonacoEditor'), { ssr: false });
