@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useGameStore } from '@/context/GameStore';
+import { useGameStore } from '@/context/GameContext';
+
 import { CHALLENGES } from '@/data/firewalls';
 import { useRouter } from 'next/navigation';
 
