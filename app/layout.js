@@ -1,6 +1,7 @@
 import { Vazirmatn, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import { GameProvider } from '@/context/GameContext';
+import { useGameStore } from '@/context/GameContext';
+
 
 const arabicFont = Vazirmatn({ subsets: ['arabic'], variable: '--font-vazir' });
 const monoFont = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
