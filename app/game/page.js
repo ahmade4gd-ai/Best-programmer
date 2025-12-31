@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 ;'import { useGameStore } from '../../context/GameContext
-import { CHALLENGES } from '@/data/firewalls';
+import CHALLENGES from '@/data/challenges/javascript.json';
 import { runValidation } from '@/utils/codeRunner';
 import { calculateFinalScore } from '@/utils/scoringEngine';
 import dynamic from 'next/dynamic';
