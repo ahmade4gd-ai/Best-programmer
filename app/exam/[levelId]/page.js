@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useGameStore } from '../../context/GameContext';
+import { useGameStore } from '../../../context/GameContext';
+import CHALLENGES from '../../../data/challenges/javascript.json';
 
-
-import CHALLENGES from '@/data/challenges/javascript.json';
 import { useRouter } from 'next/navigation';
 
 export default function ExamPage({ params }) {
