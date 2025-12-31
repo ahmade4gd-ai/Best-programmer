@@ -1,16 +1,14 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useGameStore } from '../../../context/GameContext';
-import CHALLENGES from '../../../data/challenges/javascript.json';
+import { useGameStore } from '../../context/GameContext';
+import CHALLENGES from '../../data/challenges/javascript.json';
 import { runValidation } from '../../utils/codeRunner';
 import { calculateFinalScore } from '../../utils/scoringEngine';
 import dynamic from 'next/dynamic';
 import Sidebar from '../../components/game/Sidebar';
 import Terminal from '../../components/game/Terminal';
 
-
-
-const MonacoEditor = dynamic(() => import('@/components/game/MonacoEditor'), { ssr: false });
+const MonacoEditor = dynamic(() => import('../../components/game/MonacoEditor'), { ssr: false });
 
 export default function GameEngine() {
   const { currentLevel, unlockLevel, totalPoints } = useGameStore();
@@ -28,7 +26,6 @@ export default function GameEngine() {
   const handleExecute = async () => {
     setIsProcessing(true);
     
-
     await new Promise(r => setTimeout(r, 1500));
     
     const result = runValidation(code, activeChallenge.solutionSnippet, activeChallenge.language);
@@ -49,7 +46,6 @@ export default function GameEngine() {
       
       <Sidebar currentLevel={currentLevel} />
 
-  
       <main className="flex-1 flex flex-col relative border-x border-cyan-900/30">
   
         <header className="h-20 bg-slate-950/80 border-b border-cyan-900/30 flex items-center justify-between px-6 backdrop-blur-xl">
@@ -78,7 +74,6 @@ export default function GameEngine() {
           )}
         </div>
 
-        
         <footer className="h-24 bg-slate-950 border-t border-cyan-900/30 flex items-center justify-between px-10">
           <div className="flex gap-8">
             <Stat label="Language" value={activeChallenge.language.toUpperCase()} color="text-yellow-500" />
@@ -96,7 +91,6 @@ export default function GameEngine() {
         </footer>
       </main>
 
-      
       <Terminal activeChallenge={activeChallenge} />
     </div>
   );
