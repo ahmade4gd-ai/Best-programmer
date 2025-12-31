@@ -1,0 +1,47 @@
+{
+  "category": "JavaScript Infiltration",
+  "challenges": [
+    {
+      "id": "JS_001",
+      "level": 1,
+      "title": "Breaching the Siq Gate",
+      "language": "javascript",
+      "site": "Petra - The Siq",
+      "image": "/assets/images/jordan/petra_siq.jpg",
+      "description": "The gate is locked with a logic sequence. Reverse the array to align the stones.",
+      "starterCode": "function bypass(stones) {\n  // Your code here\n}",
+      "solutionSnippet": "stones.reverse()",
+      "points": 100,
+      "difficulty": "Easy",
+      "firewallType": "Array_Buffer_Overload"
+    },
+    {
+      "id": "JS_015",
+      "level": 15,
+      "title": "The Roman Theatre Buffer",
+      "language": "javascript",
+      "site": "Amman - Roman Theatre",
+      "image": "/assets/images/jordan/roman_theatre.jpg",
+      "description": "Synchronize the acoustic echoes using Promises to unlock the stage.",
+      "starterCode": "async function synchronize(echoes) {\n  // Use Promise.all\n}",
+      "solutionSnippet": "Promise.all",
+      "points": 450,
+      "difficulty": "Medium",
+      "firewallType": "Asynchronous_Shield"
+    },
+    {
+      "id": "JS_025",
+      "level": 25,
+      "title": "Babylonian Encryption",
+      "language": "javascript",
+      "site": "Iraq - Ishtar Gate",
+      "image": "/assets/images/iraq/ishtar_gate.jpg",
+      "description": "The gate uses a closure-based lock. Extract the hidden key from the inner scope.",
+      "starterCode": "function gate() {\n  const secret = 'ISHTAR';\n  return () => { /* extract */ };\n}",
+      "solutionSnippet": "return secret",
+      "points": 1000,
+      "difficulty": "Hard",
+      "firewallType": "Scope_Lock_V2"
+    }
+  ]
+    }
