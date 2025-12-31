@@ -1,5 +1,6 @@
 "use client";
-import { useGameStore } from '@/context/GameContext';
+import { useGameStore } from '../../context/GameContext';
+
 
 import { Lock, Unlock, CheckCircle } from 'lucide-react';
 
