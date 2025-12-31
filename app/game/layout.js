@@ -1,5 +1,5 @@
 "use client";
-import { useGameStore } from '@/context/GameStore';
+import { useGameStore } from '@/context/GameContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function GameLayout({ children }) {
